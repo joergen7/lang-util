@@ -78,7 +78,7 @@ With FiveAM and its dependencies in place you can now run:
 (asdf:test-system :lang-util)
 ```
 
-## Coverage Info
+### Coverage Info
 
 Assuming, that you are running [SBCL](https://www.sbcl.org/) you can get coverage information using SBCL's  [sb-cover](http://www.sbcl.org/manual/#sb_002dcover) module.
 
