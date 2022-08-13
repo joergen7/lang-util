@@ -95,6 +95,8 @@ Below, you find examples on how the library can be used.
 
 ### Finding Duplicates in Lists
 
+The `find-duplicate` function allows to find duplicate entries in a list. What makes a duplicate can be defined by giving a test predicate that takes two arguments.
+
 ``` cl
 (find-duplicate '(1 2 1))
 1
