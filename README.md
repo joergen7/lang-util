@@ -12,23 +12,29 @@ The lang-util libraries provides common operations in handling language models l
 
 In the following, we give advice on how to set up your `common-lisp` directory. In order to create and switch to it enter
 
-	mkdir -p ~/common-lisp
-	cd ~/common-lisp
+``` bash
+mkdir -p ~/common-lisp
+cd ~/common-lisp
+```
 
 ### Installing FiveAM
 
 To run the test suite you must have the [FiveAM](https://fiveam.common-lisp.dev/) regression testing framework and its dependencies available. In the `common-lisp` folder relative to your home directory run
 
-    git clone http://common-lisp.net/project/trivial-backtrace/trivial-backtrace.git
-	git clone http://common-lisp.net/projects/alexandria/alexandria.git
-	git clone https://github.com/didierverna/asdf-flv.git
-	git clone https://github.com/lispci/fiveam.git
+``` bash
+git clone http://common-lisp.net/project/trivial-backtrace/trivial-backtrace.git
+git clone http://common-lisp.net/projects/alexandria/alexandria.git
+git clone https://github.com/didierverna/asdf-flv.git
+git clone https://github.com/lispci/fiveam.git
+```
 
 ### Adding lang-util
 
 You can load lang-util using [ASDF](https://asdf.common-lisp.dev/). ASDF looks for system definitions in the `common-lisp` folder relative to the home directory. Thus, the first step is to create a link here to the `lang-util` folder. Assuming your clone of the lang-util repository resides in `~/git/lang-util` this can be accomplished by creating a symbolic link.
 
-    ln -s ~/git/lang-util ~/common-lisp/lang-util
+``` bash
+ln -s ~/git/lang-util ~/common-lisp/lang-util
+```
 
 Eventually, you should end up with a directory structure like this:
 
@@ -48,7 +54,7 @@ You can load the library using either ASDF or Quicklisp. Below, we give instruct
 
 Most Common Lisp distributions come with ASDF packaged. Thus, you can simply require ASDF and load the lang-util system like so:
 
-```cl
+``` cl
 (require :asdf)
 (asdf:load-system :lang-util)
 ```
@@ -57,7 +63,7 @@ Most Common Lisp distributions come with ASDF packaged. Thus, you can simply req
 
 In addition to ASDF, you can load lang-util using [Quicklisp](https://www.quicklisp.org/beta/). Assuming, you have Quicklisp loaded you can run
 
-```cl
+``` cl
 (ql:quickload :lang-util)
 ```
 
@@ -67,7 +73,7 @@ In addition to ASDF, you can load lang-util using [Quicklisp](https://www.quickl
 
 With FiveAM and its dependencies in place you can now run:
 
-```cl
+``` cl
 (require :asdf)
 (asdf:test-system :lang-util)
 ```
@@ -76,7 +82,7 @@ With FiveAM and its dependencies in place you can now run:
 
 Assuming, that you are running [SBCL](https://www.sbcl.org/) you can get coverage information using SBCL's  [sb-cover](http://www.sbcl.org/manual/#sb_002dcover) module.
 
-```cl
+``` cl
 (require :asdf)
 (require :sb-cover)
 (asdf:test-system :lang-util)
@@ -87,34 +93,34 @@ Assuming, that you are running [SBCL](https://www.sbcl.org/) you can get coverag
 
 ### Finding Duplicates in Lists
 
-```cl
+``` cl
 (find-duplicate '(a a) :test #'cl:eq)
 'a
 ```
 
-```cl
+``` cl
 (find-duplicate '(1 2 3) :test #'=)
 nil
 ```
 
-```cl
+``` cl
 (find-duplicate '(1 2 1))
 1
 ```
 
 ### Padding Lines in a String
 
-```cl
+``` cl
 (line-pad "this is a comment" "// ")
 "// this is a comment"
 ```
 
-```cl
+``` cl
 (line-pad (format nil "indented~%lines") "  ")
 (format nil "  indented~%lines")
 ```
 
-```cl
+``` cl
 (line-pad (format nil "#include <don't indent this>~%but indent everything else") "  " :unless-starts-with #\#)
 (format nil "#include <don't indent this>~%  but indent everything else")
 ```
