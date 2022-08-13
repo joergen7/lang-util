@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/joergen7/lang-util.svg?branch=master)](https://app.travis-ci.com/joergen7/lang-util)
+
 # lang-util
 Basic utilities for language models in Common Lisp
 
