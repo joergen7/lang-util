@@ -48,7 +48,7 @@ You can load the library using either ASDF or Quicklisp. Below, we give instruct
 
 Most Common Lisp distributions come with ASDF packaged. Thus, you can simply require ASDF and load the lang-util system like so:
 
-```lisp
+```cl
 (require :asdf)
 (asdf:load-system :lang-util)
 ```
@@ -57,7 +57,7 @@ Most Common Lisp distributions come with ASDF packaged. Thus, you can simply req
 
 In addition to ASDF, you can load lang-util using [Quicklisp](https://www.quicklisp.org/beta/). Assuming, you have Quicklisp loaded you can run
 
-```lisp
+```cl
 (ql:quickload :lang-util)
 ```
 
@@ -67,7 +67,7 @@ In addition to ASDF, you can load lang-util using [Quicklisp](https://www.quickl
 
 With FiveAM and its dependencies in place you can now run:
 
-```lisp
+```cl
 (require :asdf)
 (asdf:test-system :lang-util)
 ```
@@ -76,7 +76,7 @@ With FiveAM and its dependencies in place you can now run:
 
 Assuming, that you are running [SBCL](https://www.sbcl.org/) you can get coverage information using SBCL's  [sb-cover](http://www.sbcl.org/manual/#sb_002dcover) module.
 
-```lisp
+```cl
 (require :asdf)
 (require :sb-cover)
 (asdf:test-system :lang-util)
@@ -87,34 +87,34 @@ Assuming, that you are running [SBCL](https://www.sbcl.org/) you can get coverag
 
 ### Finding Duplicates in Lists
 
-```lisp
+```cl
 (find-duplicate '(a a) :test #'cl:eq)
 'a
 ```
 
-```lisp
+```cl
 (find-duplicate '(1 2 3) :test #'=)
 nil
 ```
 
-```lisp
+```cl
 (find-duplicate '(1 2 1))
 1
 ```
 
 ### Padding Lines in a String
 
-```lisp
+```cl
 (line-pad "this is a comment" "// ")
 "// this is a comment"
 ```
 
-```lisp
+```cl
 (line-pad (format nil "indented~%lines") "  ")
 (format nil "  indented~%lines")
 ```
 
-```lisp
+```cl
 (line-pad (format nil "#include <don't indent this>~%but indent everything else") "  " :unless-starts-with #\#)
 (format nil "#include <don't indent this>~%  but indent everything else")
 ```
