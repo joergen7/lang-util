@@ -94,8 +94,8 @@ Assuming, that you are running [SBCL](https://www.sbcl.org/) you can get coverag
 ### Finding Duplicates in Lists
 
 ``` cl
-(find-duplicate '(a a) :test #'cl:eq)
-'a
+(find-duplicate '(1 2 1))
+1
 ```
 
 ``` cl
@@ -104,8 +104,8 @@ nil
 ```
 
 ``` cl
-(find-duplicate '(1 2 1))
-1
+(find-duplicate '(a a) :test #'cl:eq)
+'a
 ```
 
 ### Padding Lines in a String
@@ -117,7 +117,7 @@ nil
 
 ``` cl
 (line-pad (format nil "indented~%lines") "  ")
-(format nil "  indented~%lines")
+(format nil "  indented~%  lines")
 ```
 
 ``` cl
