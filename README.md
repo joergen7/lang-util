@@ -91,6 +91,8 @@ Assuming, that you are running [SBCL](https://www.sbcl.org/) you can get coverag
 
 ## Examples
 
+Below, you find examples on how the library can be used.
+
 ### Finding Duplicates in Lists
 
 ``` cl
