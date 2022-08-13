@@ -18,7 +18,7 @@ script:
                  (lambda (c h)
                    (declare (ignore c h))
                    (uiop:quit -1)))'
-       -e '(ql:quickload :lang-util)'
+       -e '(asdf:test-system :lang-util)'
 
 notifications:
   email:
