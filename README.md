@@ -121,7 +121,10 @@ nil
 ```
 
 ``` cl
-(line-pad (format nil "#include <don't indent this>~%but indent everything else") "  " :unless-starts-with #\#)
+(line-pad
+  (format nil "#include <don't indent this>~%but indent everything else")
+  "  "
+  :unless-starts-with #\#)
 (format nil "#include <don't indent this>~%  but indent everything else")
 ```
 
