@@ -22,4 +22,4 @@ script:
 
 notifications:
   email:
-    - my-email@gmail.com
+    - joergen@cuneiform-lang.org

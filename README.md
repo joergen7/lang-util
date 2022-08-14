@@ -3,14 +3,14 @@
 # lang-util
 Basic utilities for language models in Common Lisp
 
-The lang-util libraries provides common operations in handling language models like finding the first duplicate in a list or indenting/commenting the lines in a string.
+The lang-util library provides common operations in handling language models like finding the first duplicate in a list or indenting/commenting the lines in a string.
 
 ## System Requirements
 
 - A Common Lisp distribution; I tested the following distributions:
   * [SBCL](https://www.sbcl.org/)
   * [ABCL](https://abcl.org/)
-- FiveAM and its dependencies
+- [FiveAM](https://fiveam.common-lisp.dev/) and its dependencies
 
 In the following, we give advice on how to set up your `common-lisp` directory. In order to create and switch to it enter
 
