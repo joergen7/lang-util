@@ -12,6 +12,7 @@ install:
 
 script:
   - cl -l fiveam
+       -l lang-util
        -e '(setf fiveam:*debug-on-error* t
                  fiveam:*debug-on-failure* t)'
        -e '(setf *debugger-hook*
