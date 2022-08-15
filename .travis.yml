@@ -13,7 +13,7 @@ install:
 script:
   - cl -l fiveam
        -e '(setf fiveam:*on-error* :debug
-                 fiveam:*on-failure* t)'
+                 fiveam:*on-failure* :debug)'
        -e '(setf *debugger-hook*
                  (lambda (c h)
                    (declare (ignore c h))
