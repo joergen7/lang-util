@@ -33,7 +33,7 @@ git clone https://github.com/lispci/fiveam.git
 
 ### Adding lang-util
 
-`lang-util` also needs to be visible to ASDF, so we need to have it in the `~/common-lisp/` folder in some way. Assuming your clone of the lang-util repository resides in `~/git/lang-util` this can be accomplished by creating a symbolic link.
+The lang-util library also needs to be visible to ASDF. Assuming your clone of the lang-util repository resides in `~/git/lang-util/` this can be accomplished by creating a symbolic link.
 
 ``` bash
 ln -s ~/git/lang-util ~/common-lisp/lang-util
