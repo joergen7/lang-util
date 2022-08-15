@@ -10,9 +10,10 @@ The lang-util library provides common operations in handling language models lik
 - A Common Lisp distribution; I tested the following distributions:
   * [SBCL](https://www.sbcl.org/)
   * [ABCL](https://abcl.org/)
+- [ASDF](https://asdf.common-lisp.dev/) comes packaged with the aforementioned CL distributions
 - [FiveAM](https://fiveam.common-lisp.dev/) and its dependencies
 
-In the following, we give advice on how to set up your `common-lisp` directory. In order to create and switch to it enter
+ASDF looks for system definitions in the `~/common-lisp/` folder. Create it and change to it.
 
 ``` bash
 mkdir -p ~/common-lisp
@@ -21,7 +22,7 @@ cd ~/common-lisp
 
 ### Installing FiveAM
 
-To run the test suite you must have the [FiveAM](https://fiveam.common-lisp.dev/) regression testing framework and its dependencies available. In the `common-lisp` folder relative to your home directory run
+To run the test suite you must have the [FiveAM](https://fiveam.common-lisp.dev/) regression testing framework and its dependencies available. We use ASDF to manage systems and their dependencies. In the `~/common-lisp` folder run
 
 ``` bash
 git clone http://common-lisp.net/project/trivial-backtrace/trivial-backtrace.git
@@ -32,7 +33,7 @@ git clone https://github.com/lispci/fiveam.git
 
 ### Adding lang-util
 
-You can load lang-util using [ASDF](https://asdf.common-lisp.dev/). ASDF looks for system definitions in the `common-lisp` folder relative to the home directory. Thus, the first step is to create a link here to the `lang-util` folder. Assuming your clone of the lang-util repository resides in `~/git/lang-util` this can be accomplished by creating a symbolic link.
+`lang-util` also needs to be visible to ASDF, so we need to have it in the `~/common-lisp/` folder in some way. Assuming your clone of the lang-util repository resides in `~/git/lang-util` this can be accomplished by creating a symbolic link.
 
 ``` bash
 ln -s ~/git/lang-util ~/common-lisp/lang-util
