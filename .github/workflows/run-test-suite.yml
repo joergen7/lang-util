@@ -5,17 +5,30 @@ on:
     branches: [ $default-branch ]
   pull_request:
     branches: [ $default-branch ]
+    
 jobs:
   test:
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        lisp:
+          - sbcl-bin
+          - ccl-bin
+
+    env:
+      LISP: ${{ matrix.lisp }}
+      
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup SBCL
-        run: >
-          sudo apt-get update &&
-          sudo apt-get install sbcl
-        
-      - name: Greet
-        run: sbcl --non-interactive --eval '(format t "blub~%")'
+      - name: Setup Lisp
+        uses: 40ants/setup-lisp@v3
+        with:
+          asdf-system: cl-info
+
+      - uses: 40ants/run-tests@v3
+        with:
+          asdf-system: cl-info
+
