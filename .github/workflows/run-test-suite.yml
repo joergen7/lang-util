@@ -1,0 +1,9 @@
+name: run-test-suite
+run-name: run test suite
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: sbcl --non-interactive --eval '(format t "blub~%")'
