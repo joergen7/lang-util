@@ -20,15 +20,15 @@ jobs:
       
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - run: echo "done {{ $default-branch }}"
 
       - name: Setup Lisp
-        uses: 40ants/setup-lisp@v3
+        uses: 40ants/setup-lisp@v2
         with:
           asdf-system: cl-info
         
       - name: Run Test
-        uses: 40ants/run-tests@v3
+        uses: 40ants/run-tests@v2
         with:
           asdf-system: cl-info
