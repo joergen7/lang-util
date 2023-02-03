@@ -19,5 +19,14 @@
   (:use :cl)
   (:export
 
-   #:find-duplicate
-   #:line-pad))
+   :find-duplicate
+   :line-pad
+   :line-adjust
+   :drop-char
+
+   :token
+   :token-p
+   :value
+   :start-pos
+   :end-pos
+   :pos->line))

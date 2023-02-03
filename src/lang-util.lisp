@@ -72,5 +72,93 @@ Examples:
     (format nil "~{~a~^~%~}" indented-line-list)))
 
     
-  
+(defgeneric line-adjust (s ch width)
+  (:documentation "
+(line-adjust S CH WIDTH)
+
+Right-pad every line in S shorter than WIDTH with CH and
+truncate every line longer than WIDTH so that each line
+conforms WIDTH."))
+
+(defmethod line-adjust ((s string) (ch character) (width integer))
+
+  (when (< width 0)
+	(error "width must not be negative"))
+
+  (let ((stream (make-string-output-stream))
+		(len    (length s)))
+	(labels ((process-string (cursor)
+			   (let ((pos (position #\newline s :start cursor)))
+				 (if pos
+					 
+					 ;; handle intermediate line
+					 (progn
+					   (write-string (subseq s cursor (+ cursor (min width pos))) stream)
+					   (loop for i from (1+ pos) to (+ cursor width) do (write-char ch stream))
+					   (write-char #\newline stream)
+					   (process-string (1+ pos)))
+
+					 ;; handle last line
+					 (progn
+					   (write-string (subseq s cursor (min len (+ cursor width))) stream)
+					   (loop for i from (1+ len) to (+ cursor width) do (write-char ch stream)))))))
+					 
+	  (process-string 0))
+	(get-output-stream-string stream)))
+
+(defgeneric drop-char (s ch)
+  (:documentation "
+(drop-return S CH)
+
+Filters out all occurrences of character CH in string S.
+
+Returns S without carriage-return characters."))
+
+(defmethod drop-char ((s string) (ch character))
+  (let ((stream (make-string-output-stream)))
+	(loop for c across s
+		  unless (eq c ch)
+			do (write-char c stream))
+	(get-output-stream-string stream)))
+
+
+(defclass token ()
+  ((content
+	:initarg  :content
+	:initform (error "token must have content slot")
+	:reader   content)
+   (start-pos
+	:initarg  :start-pos
+	:initform (error "token must have start-pos slot")
+	:reader   start-pos)
+   (end-pos
+	:initarg  :end-pos
+	:initform (error "token must have end-pos slot")
+	:reader   end-pos)))
+
+(defmethod token ((content string) (start-pos integer) (end-pos integer))
+  (make-instance 'token
+				 :content   content
+				 :start-pos start-pos
+				 :end-pos   end-pos))
+
+(defmethod token-p (x)
+  (typep x 'token))
+
+(defgeneric pos->line (s pos)
+  (:documentation "
+(pos->line S POS)
+
+Calculates the line number of cursor position POS in string S.
+
+Returns the line number."))
+
+(defmethod pos->line ((s string) (pos integer))
+  (let ((l (loop for p from 0
+				 for c across s
+				 when (= p pos)
+				   do (return l)
+				 counting (eq c #\newline) into l
+				 finally (return l))))
+	(1+ l)))
 

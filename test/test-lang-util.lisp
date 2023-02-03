@@ -24,8 +24,30 @@
   (is-false (find-duplicate '(1 2 3) :test #'=))
   (is (equal 1 (find-duplicate '(1 2 1)))))
 
-(test lang-util-line-pad-test
+(test lang-util-line-pad
   (is (equal "  blub" (line-pad "blub" "  ")))
   (is (equal (format nil "  bla~%  blub") (line-pad (format nil "bla~%blub") "  ")))
   (is (equal "#include <iostream>" (line-pad "#include <iostream>" "  " :unless-starts-with #\#))))
+
+(test lang-util-line-adjust
+  (is (string-equal "" (line-adjust "" #\x 0)))
+  (is (string-equal "" (line-adjust "blub" #\x 0)))
+  (is (string-equal "xxxx" (line-adjust "" #\x 4)))
+  (is (string-equal "blub" (line-adjust "blub" #\x 4)))
+  (is (string-equal "blub" (line-adjust "bluba" #\x 4)))
+  (is (string-equal (format nil "blax~%blub") (line-adjust (format nil "bla~%blub") #\x 4)))
+  (is (string-equal (format nil "blak~%blub") (line-adjust (format nil "blak~%blub") #\x 4)))
+  (is (string-equal (format nil "blak~%blub") (line-adjust (format nil "blakk~%blub") #\x 4))))
+
+(test lang-util-pos->line
+  (is (= 1 (pos->line "" 0)))
+  (is (= 1 (pos->line (format nil "~%") 0)))
+  (is (= 2 (pos->line (format nil "~%") 1)))
+  (is (= 1 (pos->line (format nil "a~%") 0)))
+  (is (= 1 (pos->line (format nil "a~%") 1)))
+  (is (= 2 (pos->line (format nil "a~%") 2)))
+  (is (= 1 (pos->line (format nil "a~%b") 0)))
+  (is (= 1 (pos->line (format nil "a~%b") 1)))
+  (is (= 2 (pos->line (format nil "a~%b") 2)))
+  (is (= 2 (pos->line (format nil "a~%b") 3))))
 
